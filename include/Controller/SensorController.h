@@ -12,7 +12,9 @@ namespace ACC { namespace Controller {
     class SensorController {
         private:
             /** How often do we want to send reading? */
-            static constexpr unsigned short measureInterval = 10000;
+            static constexpr unsigned short measureInterval = 600;
+            /** How many seconds passed since last measure? Initialize with limit, so we get first measure straight away */
+            unsigned short sinceLastMeasure = measureInterval;
 
             RemoteCommand::Executor & remoteExecutor;
             Sensors::TemperatureSensor & temperatureSensor;
