@@ -12,7 +12,11 @@ void MCP9808::initialize() {
 }
 
 double MCP9808::measureTemperature() {
+    sensor.wake();
+
     measures[measureIndex++ % numberOfMeasures] = sensor.readTempC();
+
+    sensor.shutdown();
 
     double sum = 0;
     for (double measure : measures) {
