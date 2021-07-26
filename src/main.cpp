@@ -4,9 +4,10 @@
 
 #define INDOOR 1
 #define OUTDOOR 2
-#define VARIANT OUTDOOR
+#define VARIANT INDOOR
 
-ACC::Controller::RemoteCommand::Executor executor(Serial, 2);
+ACC::Controller::RemoteCommand::Radio radio(Serial, 2);
+ACC::Controller::RemoteCommand::Executor executor(radio);
 
 #if VARIANT == OUTDOOR
     #include "Sensors/MCP9808.h"
@@ -20,7 +21,7 @@ ACC::Controller::RemoteCommand::Executor executor(Serial, 2);
 
 void setup() {
     Serial.begin(9600);
-    executor.initialize();
+    radio.initialize();
 #if VARIANT == OUTDOOR
     mcp9808.initialize();
 #elif VARIANT == INDOOR
@@ -28,6 +29,7 @@ void setup() {
 #endif
 }
 
+double value = -11.7f;
 void loop() {
     controller.process();
 }

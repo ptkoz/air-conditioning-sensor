@@ -2,6 +2,7 @@
 #define AIR_CONDITIONING_SENSOR_REMOTECOMMANDEXECUTOR_H
 
 #include "Arduino.h"
+#include "RemoteCommandRadio.h"
 
 namespace ACC { namespace Controller { namespace RemoteCommand {
     /**
@@ -9,14 +10,10 @@ namespace ACC { namespace Controller { namespace RemoteCommand {
      */
      class Executor {
          private:
-             Stream & stream;
-             const unsigned char setPin;
+             Radio & radio;
          public:
-             Executor(Stream & stream, unsigned char setPin):
-                stream(stream),
-                setPin(setPin) {}
-
-             void initialize();
+             explicit Executor(Radio & radio):
+                radio(radio) {}
 
              void execute(
                  unsigned short address,
