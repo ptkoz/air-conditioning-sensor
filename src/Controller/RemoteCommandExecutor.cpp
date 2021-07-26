@@ -9,10 +9,16 @@ void Executor::execute(
     const void * message,
     size_t length
 ) {
+    radio.wakeup();
+
     Stream & stream = radio.getStream();
     stream.write(static_cast<const char *>(static_cast<const void *>(&address)), sizeof address);
     stream.write(static_cast<const char *>(static_cast<const void *>(&command)), sizeof command);
     stream.write(static_cast<const char *>(message), length);
     stream.write((char) 0);
+
+    delay(100); // leave some time to send it
+
+    radio.sleep();
 }
 

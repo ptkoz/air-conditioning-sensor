@@ -36,6 +36,7 @@ void ACC::Controller::RemoteCommand::Radio::sleep() {
     enterATMode();
 
     stream.print("AT+SLEEP");
+    delay(80);
     while (stream.available()) {
         stream.read();
     }
