@@ -4,7 +4,7 @@
 
 #define INDOOR 1
 #define OUTDOOR 2
-#define VARIANT INDOOR
+#define VARIANT OUTDOOR
 
 ACC::Controller::RemoteCommand::Radio radio(Serial, 2);
 ACC::Controller::RemoteCommand::Executor executor(radio);
@@ -29,7 +29,6 @@ void setup() {
 #endif
 }
 
-double value = -11.7f;
 void loop() {
     controller.process();
 }
