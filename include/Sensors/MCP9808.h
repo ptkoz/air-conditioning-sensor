@@ -7,6 +7,9 @@
 #define MCP9808_NUMBER_OF_TEMPERATURE_MEASURES 10
 
 namespace ACC { namespace Sensors {
+    /**
+     * A MCP9808 temperature sensor
+     */
     class MCP9808 : public TemperatureSensor {
         private:
             static constexpr unsigned char numberOfMeasures = 6;

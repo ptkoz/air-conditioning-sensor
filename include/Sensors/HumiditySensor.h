@@ -3,7 +3,7 @@
 
 namespace ACC { namespace Sensors {
     /**
-     * An abstract temperature sensor
+     * An abstract humidity sensor
      */
     class HumiditySensor {
         public:
