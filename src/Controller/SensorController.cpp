@@ -20,7 +20,7 @@ void ACC::Controller::SensorController::process() {
                 voltageSensor.measureVoltage()
             };
 
-            remoteExecutor.execute(recipientAddress, recipientCommand, &values, 2 * sizeof(values));
+            remoteExecutor.execute(recipientAddress, recipientCommand, &values, 2 * sizeof(values[0]));
         }
 
         sinceLastMeasure = 0;
