@@ -11,16 +11,8 @@ namespace ACC { namespace Sensors {
      */
     class SHT35 : public TemperatureSensor, public HumiditySensor {
         private:
-            static constexpr unsigned char numberOfMeasures = 3;
-
             uint8_t sensorAddress;
             SHT31 sensor;
-
-            unsigned char temperatureMeasureIndex = 0;
-            double temperatureMeasures[numberOfMeasures] = {};
-
-            unsigned char humidityMeasureIndex = 0;
-            double humidityMeasures[numberOfMeasures] = {};
 
             void requestMeasurementFromSensor();
         public:
@@ -28,8 +20,8 @@ namespace ACC { namespace Sensors {
                 sensorAddress(sensorAddress) {}
 
             void initialize();
-            double measureTemperature() override;
-            double measureHumidity() override;
+            float measureTemperature() override;
+            float measureHumidity() override;
     };
 } }
 

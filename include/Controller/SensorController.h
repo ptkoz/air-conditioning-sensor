@@ -3,6 +3,7 @@
 
 #include "Controller/RemoteCommandExecutor.h"
 #include "Sensors/TemperatureSensor.h"
+#include "Sensors/VoltageSensor.h"
 #include "Sensors/HumiditySensor.h"
 
 namespace ACC { namespace Controller {
@@ -11,32 +12,39 @@ namespace ACC { namespace Controller {
      */
     class SensorController {
         private:
-            /** How often do we want to send reading? */
-            static constexpr unsigned short measureInterval = 600;
-            /** How many seconds passed since last measure? Initialize with limit, so we get first measure straight away */
-            unsigned short sinceLastMeasure = measureInterval;
-
             RemoteCommand::Executor & remoteExecutor;
             Sensors::TemperatureSensor & temperatureSensor;
+            Sensors::VoltageSensor & voltageSensor;
             /** Humidity sensor is optional */
             Sensors::HumiditySensor * const humiditySensor;
 
             /** Where to send data */
             const unsigned short recipientAddress;
             const unsigned short recipientCommand;
+
+            /** How often do we want to send reading? */
+            const unsigned short measureInterval;
+            /** How many seconds passed since last measure? */
+            unsigned short sinceLastMeasure;
         public:
             SensorController(
                 RemoteCommand::Executor & remoteExecutor,
                 Sensors::TemperatureSensor & temperatureSensor,
+                Sensors::VoltageSensor & voltageSensor,
                 Sensors::HumiditySensor * humiditySensor,
                 unsigned short recipientAddress,
-                const unsigned short recipientCommand
+                const unsigned short recipientCommand,
+                const unsigned short measureInterval
             ):
                 remoteExecutor(remoteExecutor),
                 temperatureSensor(temperatureSensor),
+                voltageSensor(voltageSensor),
                 humiditySensor(humiditySensor),
                 recipientAddress(recipientAddress),
-                recipientCommand(recipientCommand) {}
+                recipientCommand(recipientCommand),
+                measureInterval(measureInterval),
+                sinceLastMeasure(measureInterval) // initialize with measure interval so we get reading straight away
+                {}
 
             void process();
     };

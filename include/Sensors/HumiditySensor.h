@@ -7,7 +7,7 @@ namespace ACC { namespace Sensors {
      */
     class HumiditySensor {
         public:
-            virtual double measureHumidity() = 0;
+            virtual float measureHumidity() = 0;
     };
 } }
 

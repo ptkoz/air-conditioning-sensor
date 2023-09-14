@@ -7,15 +7,20 @@ using ACC::Controller::SensorController;
 void ACC::Controller::SensorController::process() {
     if (sinceLastMeasure >= measureInterval) {
         if (humiditySensor) {
-            double values[2] = {
+            float values[3] = {
                 temperatureSensor.measureTemperature(),
-                humiditySensor->measureHumidity()
+                humiditySensor->measureHumidity(),
+                voltageSensor.measureVoltage()
             };
 
-            remoteExecutor.execute(recipientAddress, recipientCommand, values, 2 * sizeof values[0]);
+            remoteExecutor.execute(recipientAddress, recipientCommand, values, 3 * sizeof values[0]);
         } else {
-            double value = temperatureSensor.measureTemperature();
-            remoteExecutor.execute(recipientAddress, recipientCommand, &value, sizeof(value));
+            float values[2] = {
+                temperatureSensor.measureTemperature(),
+                voltageSensor.measureVoltage()
+            };
+
+            remoteExecutor.execute(recipientAddress, recipientCommand, &values, 2 * sizeof(values));
         }
 
         sinceLastMeasure = 0;

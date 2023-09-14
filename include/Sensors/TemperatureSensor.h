@@ -7,7 +7,7 @@ namespace ACC { namespace Sensors {
      */
     class TemperatureSensor {
         public:
-            virtual double measureTemperature() = 0;
+            virtual float measureTemperature() = 0;
     };
 } }
 
