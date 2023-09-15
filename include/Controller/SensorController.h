@@ -1,7 +1,7 @@
 #ifndef AIR_CONDITIONING_SENSOR_SENSORCONTROLLER_H
 #define AIR_CONDITIONING_SENSOR_SENSORCONTROLLER_H
 
-#include "Controller/RemoteCommandExecutor.h"
+#include "Controller/RemoteCommandRadio.h"
 #include "Sensors/TemperatureSensor.h"
 #include "Sensors/VoltageSensor.h"
 #include "Sensors/HumiditySensor.h"
@@ -12,7 +12,7 @@ namespace ACC { namespace Controller {
      */
     class SensorController {
         private:
-            RemoteCommand::Executor & remoteExecutor;
+            RemoteCommand::Radio & radio;
             Sensors::TemperatureSensor & temperatureSensor;
             Sensors::VoltageSensor & voltageSensor;
             /** Humidity sensor is optional */
@@ -28,7 +28,7 @@ namespace ACC { namespace Controller {
             unsigned short sinceLastMeasure;
         public:
             SensorController(
-                RemoteCommand::Executor & remoteExecutor,
+                RemoteCommand::Radio & radio,
                 Sensors::TemperatureSensor & temperatureSensor,
                 Sensors::VoltageSensor & voltageSensor,
                 Sensors::HumiditySensor * humiditySensor,
@@ -36,7 +36,7 @@ namespace ACC { namespace Controller {
                 const unsigned short recipientCommand,
                 const unsigned short measureInterval
             ):
-                remoteExecutor(remoteExecutor),
+                radio(radio),
                 temperatureSensor(temperatureSensor),
                 voltageSensor(voltageSensor),
                 humiditySensor(humiditySensor),
