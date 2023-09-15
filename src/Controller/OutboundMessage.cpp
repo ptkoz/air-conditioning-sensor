@@ -19,7 +19,7 @@ ACC::Controller::RemoteCommand::OutboundMessage::OutboundMessage(
 
     // create buffer for encoded message
     encodedData = new unsigned char[maxEncodedMessageLength];
-    // every message starts with message start byte
+    // every message starts with message start marker
     encodedData[0] = 0xFF;
 
     unsigned char wholeMessage[wholeMessageLength];
@@ -27,12 +27,12 @@ ACC::Controller::RemoteCommand::OutboundMessage::OutboundMessage(
     wholeMessage[1] = command;
     memcpy(&wholeMessage[2], message, messageLength);
 
-    unsigned char addedBytes = 0; // one byte for message start ane for message length
+    unsigned char addedBytes = 0;
     for (size_t i = 0; i < wholeMessageLength; i++) {
         if (wholeMessage[i] & 0x80) {
             // Highest bit is set, let's split this byte across two chars with only 4 low bits set on each, to ensure
-            // start byte doesn't occur anywhere in the data stream. Then flag first byte with "10" on highest bits
-            // which doesn't collide with start byte, but can inform consumer those need to be joined when reading.
+            // start marker doesn't occur anywhere in the data stream. Then flag first byte with "10" on highest bits
+            // which doesn't collide with start marker, but can inform consumer those need to be joined when reading.
             encodedData[2 + i + addedBytes] = (wholeMessage[i] >> 4) | 0x80;
             encodedData[2 + i + addedBytes + 1] = wholeMessage[i] & 0x0F;
             addedBytes++;
