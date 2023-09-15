@@ -28,7 +28,7 @@ namespace ACC {
                     }
 
                     unsigned char getDataLength() const {
-                        return encodedData[1] + 2; // the actual message + start byte + length
+                        return encodedData[1] + 2; // the actual message + start marker + length
                     }
             };
         }
