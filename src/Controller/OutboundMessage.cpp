@@ -1,4 +1,5 @@
 #include "Controller/OutboundMessage.h"
+#include "Arduino.h"
 
 ACC::Controller::RemoteCommand::OutboundMessage::OutboundMessage(
     unsigned char address,

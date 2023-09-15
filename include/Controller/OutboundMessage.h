@@ -1,8 +1,6 @@
 #ifndef AIR_CONDITIONING_SENSOR_OUTBOUNDMESSAGE_H
 #define AIR_CONDITIONING_SENSOR_OUTBOUNDMESSAGE_H
 
-#include "Arduino.h"
-
 namespace ACC {
     namespace Controller {
         namespace RemoteCommand {
