@@ -5,7 +5,7 @@
 #define LIVING_ROOM 1
 #define BEDROOM 2
 #define OUTDOOR 3
-#define VARIANT OUTDOOR
+#define VARIANT BEDROOM
 
 ACC::Controller::RemoteCommand::Radio radio(Serial, 2);
 ACC::Sensors::VccVoltageSensor vccVoltageSensor;
@@ -17,7 +17,7 @@ ACC::Sensors::VccVoltageSensor vccVoltageSensor;
 #elif VARIANT == BEDROOM
     #include "Sensors/SHT35.h"
     ACC::Sensors::SHT35 sht35(0x45);
-    ACC::Controller::SensorController controller(radio, sht35, vccVoltageSensor, &sht35, 0xA1U, 0x21U, 600);
+    ACC::Controller::SensorController controller(radio, sht35, vccVoltageSensor, &sht35, 0xA1U, 0x21U, 60);
 #elif VARIANT == LIVING_ROOM
     #include "Sensors/SHT35.h"
     ACC::Sensors::SHT35 sht35(0x45);
