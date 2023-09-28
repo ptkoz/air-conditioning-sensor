@@ -5,7 +5,7 @@
 #define LIVING_ROOM 1
 #define BEDROOM 2
 #define OUTDOOR 3
-#define VARIANT LIVING_ROOM
+#define VARIANT OUTDOOR
 
 ACC::Controller::RemoteCommand::Radio radio(Serial, 2);
 ACC::Sensors::VccVoltageSensor vccVoltageSensor;

@@ -4,7 +4,7 @@
 #include "TemperatureSensor.h"
 #include <Adafruit_MCP9808.h>
 
-namespace ACC { namespace Sensors {
+namespace ACC::Sensors {
     /**
      * A MCP9808 temperature sensor
      */
@@ -13,12 +13,13 @@ namespace ACC { namespace Sensors {
             uint8_t sensorAddress;
             Adafruit_MCP9808 sensor;
         public:
-            explicit MCP9808(uint8_t sensorAddress):
+            explicit MCP9808(uint8_t sensorAddress) :
                 sensorAddress(sensorAddress) {}
 
             void initialize();
+
             float measureTemperature() override;
     };
-} }
+}
 
 #endif //AIR_CONDITIONING_SENSOR_MCP9808_H

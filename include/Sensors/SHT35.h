@@ -5,7 +5,7 @@
 #include "Sensors/TemperatureSensor.h"
 #include "Sensors/HumiditySensor.h"
 
-namespace ACC { namespace Sensors {
+namespace ACC::Sensors {
     /**
      * An SHT35 temperature & humidity sensor
      */
@@ -15,14 +15,17 @@ namespace ACC { namespace Sensors {
             SHT31 sensor;
 
             void requestMeasurementFromSensor();
+
         public:
-            explicit SHT35(uint8_t sensorAddress):
+            explicit SHT35(uint8_t sensorAddress) :
                 sensorAddress(sensorAddress) {}
 
             void initialize();
+
             float measureTemperature() override;
+
             float measureHumidity() override;
     };
-} }
+}
 
 #endif //AIR_CONDITIONING_SENSOR_SHT35_H

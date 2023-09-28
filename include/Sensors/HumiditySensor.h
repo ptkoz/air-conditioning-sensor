@@ -1,7 +1,7 @@
 #ifndef AIR_CONDITIONING_SENSOR_HUMIDITYSENSOR_H
 #define AIR_CONDITIONING_SENSOR_HUMIDITYSENSOR_H
 
-namespace ACC { namespace Sensors {
+namespace ACC::Sensors {
     /**
      * An abstract humidity sensor
      */
@@ -9,6 +9,6 @@ namespace ACC { namespace Sensors {
         public:
             virtual float measureHumidity() = 0;
     };
-} }
+}
 
 #endif //AIR_CONDITIONING_SENSOR_TEMPERATURESENSOR_H

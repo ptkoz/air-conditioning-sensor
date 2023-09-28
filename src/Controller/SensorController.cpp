@@ -1,5 +1,6 @@
 #include "Controller/SensorController.h"
 #include "Controller/OutboundMessage.h"
+#include "Arduino.h"
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 

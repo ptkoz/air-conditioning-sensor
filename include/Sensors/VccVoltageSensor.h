@@ -3,14 +3,14 @@
 
 #include "VoltageSensor.h"
 
-namespace ACC { namespace Sensors {
-        /**
-         * A voltage sensor measuring internal ADC voltage
-         */
-        class VccVoltageSensor : public VoltageSensor {
-            public:
-                float measureVoltage();
-        };
-    } }
+namespace ACC::Sensors {
+    /**
+     * A voltage sensor measuring internal ADC voltage
+     */
+    class VccVoltageSensor : public VoltageSensor {
+        public:
+            float measureVoltage();
+    };
+}
 
 #endif //AIR_CONDITIONING_SENSOR_VCCVOLTAGESENSOR_H
