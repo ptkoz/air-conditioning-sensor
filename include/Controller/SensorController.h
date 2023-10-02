@@ -1,5 +1,4 @@
-#ifndef AIR_CONDITIONING_SENSOR_SENSORCONTROLLER_H
-#define AIR_CONDITIONING_SENSOR_SENSORCONTROLLER_H
+#pragma once
 
 #include "Controller/RemoteCommandRadio.h"
 #include "Sensors/TemperatureSensor.h"
@@ -50,4 +49,3 @@ namespace ACC::Controller {
     };
 }
 
-#endif //AIR_CONDITIONING_SENSOR_SENSORCONTROLLER_H

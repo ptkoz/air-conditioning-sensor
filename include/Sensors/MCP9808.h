@@ -1,5 +1,4 @@
-#ifndef AIR_CONDITIONING_SENSOR_MCP9808_H
-#define AIR_CONDITIONING_SENSOR_MCP9808_H
+#pragma once
 
 #include "TemperatureSensor.h"
 #include <Adafruit_MCP9808.h>
@@ -21,5 +20,3 @@ namespace ACC::Sensors {
             float measureTemperature() override;
     };
 }
-
-#endif //AIR_CONDITIONING_SENSOR_MCP9808_H

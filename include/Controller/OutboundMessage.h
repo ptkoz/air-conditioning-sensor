@@ -1,5 +1,4 @@
-#ifndef AIR_CONDITIONING_SENSOR_OUTBOUNDMESSAGE_H
-#define AIR_CONDITIONING_SENSOR_OUTBOUNDMESSAGE_H
+#pragma once
 
 namespace ACC::Controller::RemoteCommand {
     /**
@@ -29,4 +28,3 @@ namespace ACC::Controller::RemoteCommand {
     };
 }
 
-#endif //AIR_CONDITIONING_SENSOR_OUTBOUNDMESSAGE_H

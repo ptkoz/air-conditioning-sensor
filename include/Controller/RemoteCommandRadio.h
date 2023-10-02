@@ -1,5 +1,4 @@
-#ifndef AIR_CONDITIONING_SENSOR_REMOTECOMMANDRADIO_H
-#define AIR_CONDITIONING_SENSOR_REMOTECOMMANDRADIO_H
+#pragma once
 
 #include <Stream.h>
 #include "OutboundMessage.h"
@@ -36,5 +35,3 @@ namespace ACC::Controller::RemoteCommand {
             }
     };
 }
-
-#endif //AIR_CONDITIONING_SENSOR_REMOTECOMMANDRADIO_H

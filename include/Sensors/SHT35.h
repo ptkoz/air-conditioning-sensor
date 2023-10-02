@@ -1,5 +1,4 @@
-#ifndef AIR_CONDITIONING_SENSOR_SHT35_H
-#define AIR_CONDITIONING_SENSOR_SHT35_H
+#pragma once
 
 #include <SHT31.h>
 #include "Sensors/TemperatureSensor.h"
@@ -27,5 +26,3 @@ namespace ACC::Sensors {
             float measureHumidity() override;
     };
 }
-
-#endif //AIR_CONDITIONING_SENSOR_SHT35_H

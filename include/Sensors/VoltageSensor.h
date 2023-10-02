@@ -1,5 +1,4 @@
-#ifndef AIR_CONDITIONING_SENSOR_VOLTAGESENSOR_H
-#define AIR_CONDITIONING_SENSOR_VOLTAGESENSOR_H
+#pragma once
 
 namespace ACC::Sensors {
     /**
@@ -10,5 +9,3 @@ namespace ACC::Sensors {
             virtual float measureVoltage() = 0;
     };
 }
-
-#endif //AIR_CONDITIONING_SENSOR_VOLTAGESENSOR_H

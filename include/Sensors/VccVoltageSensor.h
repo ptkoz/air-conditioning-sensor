@@ -1,5 +1,4 @@
-#ifndef AIR_CONDITIONING_SENSOR_VCCVOLTAGESENSOR_H
-#define AIR_CONDITIONING_SENSOR_VCCVOLTAGESENSOR_H
+#pragma once
 
 #include "VoltageSensor.h"
 
@@ -9,8 +8,6 @@ namespace ACC::Sensors {
      */
     class VccVoltageSensor : public VoltageSensor {
         public:
-            float measureVoltage();
+            float measureVoltage() override;
     };
 }
-
-#endif //AIR_CONDITIONING_SENSOR_VCCVOLTAGESENSOR_H
