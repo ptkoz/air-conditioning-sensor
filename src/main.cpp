@@ -8,7 +8,7 @@
 #define LIVING_ROOM 0x20U
 #define BEDROOM 0x21U
 #define OUTDOOR 0x41U
-#define VARIANT BEDROOM
+#define VARIANT OUTDOOR
 
 ACC::Security::NounceProvider nounceProvider;
 ACC::Radio::Radio radio(Serial, 2, VARIANT, nounceProvider);  // NOLINT(*-interfaces-global-init)
@@ -17,7 +17,7 @@ ACC::Sensors::VccVoltageSensor vccVoltageSensor;
 #if VARIANT == OUTDOOR
     #include "Sensors/MCP9808.h"
     ACC::Sensors::MCP9808 sensor(0x18);
-    ACC::Controller::SensorController controller(publisher, mcp9808, vccVoltageSensor, nullptr, 0xA1, 0x41, 600);
+    ACC::Controller::SensorController controller(radio, sensor, vccVoltageSensor, nullptr, MASTER_ADDRESS, 0x01U, 600);
 #elif VARIANT == BEDROOM or VARIANT == LIVING_ROOM
     #include "Sensors/SHT35.h"
     ACC::Sensors::SHT35 sensor(0x45);
