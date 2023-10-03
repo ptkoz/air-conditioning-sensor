@@ -1,27 +1,27 @@
 #include <Arduino.h>
 #include "Controller/SensorController.h"
 #include "Sensors/VccVoltageSensor.h"
+#include "Radio/Radio.h"
+#include "Security/NounceProvider.h"
 
-#define LIVING_ROOM 1
-#define BEDROOM 2
-#define OUTDOOR 3
+#define MASTER_ADDRESS 0x10U
+#define LIVING_ROOM 0x20U
+#define BEDROOM 0x21U
+#define OUTDOOR 0x41U
 #define VARIANT BEDROOM
 
-ACC::Controller::RemoteCommand::Radio radio(Serial, 2);
+ACC::Security::NounceProvider nounceProvider;
+ACC::Radio::Radio radio(Serial, 2, VARIANT, nounceProvider);  // NOLINT(*-interfaces-global-init)
 ACC::Sensors::VccVoltageSensor vccVoltageSensor;
 
 #if VARIANT == OUTDOOR
     #include "Sensors/MCP9808.h"
-    ACC::Sensors::MCP9808 mcp9808(0x18);
-    ACC::Controller::SensorController controller(radio, mcp9808, vccVoltageSensor, nullptr, 0xA1, 0x41, 600);
-#elif VARIANT == BEDROOM
+    ACC::Sensors::MCP9808 sensor(0x18);
+    ACC::Controller::SensorController controller(publisher, mcp9808, vccVoltageSensor, nullptr, 0xA1, 0x41, 600);
+#elif VARIANT == BEDROOM or VARIANT == LIVING_ROOM
     #include "Sensors/SHT35.h"
-    ACC::Sensors::SHT35 sht35(0x45);
-    ACC::Controller::SensorController controller(radio, sht35, vccVoltageSensor, &sht35, 0xA1U, 0x21U, 60);
-#elif VARIANT == LIVING_ROOM
-    #include "Sensors/SHT35.h"
-    ACC::Sensors::SHT35 sht35(0x45);
-    ACC::Controller::SensorController controller(radio, sht35, vccVoltageSensor, &sht35, 0xA1U, 0x20U, 60);
+    ACC::Sensors::SHT35 sensor(0x45);
+    ACC::Controller::SensorController controller(radio, sensor, vccVoltageSensor, &sensor, MASTER_ADDRESS, 0x01U, 60);
 #endif
 
 void setup() {
@@ -31,11 +31,10 @@ void setup() {
 
     Serial.begin(4800);
     radio.initialize();
-#if VARIANT == OUTDOOR
-    mcp9808.initialize();
-#elif VARIANT == BEDROOM or VARIANT == LIVING_ROOM
-    sht35.initialize();
-#endif
+    sensor.initialize();
+
+    ACC::Security::NounceRegistry nounceRegistry;
+    nounceProvider.initialize(radio, nounceRegistry, MASTER_ADDRESS, 0x00U);
 }
 
 void loop() {

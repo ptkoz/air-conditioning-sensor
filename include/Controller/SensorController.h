@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Controller/RemoteCommandRadio.h"
+#include "Radio/Publisher.h"
 #include "Sensors/TemperatureSensor.h"
 #include "Sensors/VoltageSensor.h"
 #include "Sensors/HumiditySensor.h"
@@ -11,7 +11,7 @@ namespace ACC::Controller {
      */
     class SensorController {
         private:
-            RemoteCommand::Radio &radio;
+            Radio::Publisher &publisher;
             Sensors::TemperatureSensor &temperatureSensor;
             Sensors::VoltageSensor &voltageSensor;
             /** Humidity sensor is optional */
@@ -27,7 +27,7 @@ namespace ACC::Controller {
             unsigned short sinceLastMeasure;
         public:
             SensorController(
-                RemoteCommand::Radio &radio,
+                Radio::Publisher &publisher,
                 Sensors::TemperatureSensor &temperatureSensor,
                 Sensors::VoltageSensor &voltageSensor,
                 Sensors::HumiditySensor *humiditySensor,
@@ -35,7 +35,7 @@ namespace ACC::Controller {
                 const unsigned short recipientCommand,
                 const unsigned short measureInterval
             ) :
-                radio(radio),
+                publisher(publisher),
                 temperatureSensor(temperatureSensor),
                 voltageSensor(voltageSensor),
                 humiditySensor(humiditySensor),

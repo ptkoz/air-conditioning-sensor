@@ -1,11 +1,9 @@
 #include "Controller/SensorController.h"
-#include "Controller/OutboundMessage.h"
 #include "Arduino.h"
 #include <avr/sleep.h>
 #include <avr/wdt.h>
 
 using ACC::Controller::SensorController;
-using ACC::Controller::RemoteCommand::OutboundMessage;
 
 void ACC::Controller::SensorController::process() {
     if (sinceLastMeasure >= measureInterval) {
@@ -16,18 +14,14 @@ void ACC::Controller::SensorController::process() {
                 voltageSensor.measureVoltage()
             };
 
-            radio.send(
-                OutboundMessage(recipientAddress, recipientCommand, values, 3 * sizeof(float))
-            );
+            publisher.send(recipientAddress, recipientCommand, values, 3 * sizeof(float));
         } else {
             float values[2] = {
                 temperatureSensor.measureTemperature(),
                 voltageSensor.measureVoltage()
             };
 
-            radio.send(
-                OutboundMessage(recipientAddress, recipientCommand, values, 2 * sizeof(float))
-            );
+            publisher.send(recipientAddress, recipientCommand, values, 2 * sizeof(float));
         }
 
         sinceLastMeasure = 0;
